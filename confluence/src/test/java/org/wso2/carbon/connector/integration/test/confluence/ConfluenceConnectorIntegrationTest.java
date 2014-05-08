@@ -503,7 +503,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token, connectorProperties.getProperty("pageID"),
+					connectorProperties.getProperty("invalidAttachment"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -587,7 +620,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("pageID"),
+					connectorProperties.getProperty("invalidAttachment"),
+					connectorProperties.getProperty("versionNumber"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -670,7 +737,42 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+			
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("pageID"),
+					connectorProperties.getProperty("invalidAttachment"),
+					connectorProperties.getProperty("versionNumber"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -777,7 +879,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+			
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -855,7 +990,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -987,7 +1155,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("lable"),
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1065,7 +1267,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidLable"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1141,7 +1376,39 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token, "-10");
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1217,7 +1484,39 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token, "-10");
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1294,7 +1593,39 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token, "invalidLable");
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1352,7 +1683,42 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"),
+					connectorProperties.getProperty("moveTargetPageID"),
+					connectorProperties.getProperty("pageManagementPosition"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1409,7 +1775,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"),
+					connectorProperties.getProperty("spaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1484,7 +1884,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1563,7 +1996,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1640,7 +2106,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1716,7 +2215,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1775,7 +2307,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("spaceId"),
+					connectorProperties.getProperty("permissionInvalidPermit"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1835,7 +2401,42 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("permissionPermit"),
+					connectorProperties.getProperty("entity"),
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1913,7 +2514,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPageID"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -1991,7 +2625,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2072,7 +2739,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidSpaceId"),
+					connectorProperties.getProperty("userName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2178,7 +2879,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidGroupName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2237,7 +2971,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("permissionInvalidPermit"),
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2295,7 +3063,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("permissionPermit"),
+					connectorProperties.getProperty("invalidGroupName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2355,7 +3157,42 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("permissionInvalidPermit"),
+					connectorProperties.getProperty("removePermissionEntity"),
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2431,7 +3268,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidSpaceId"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2507,7 +3377,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("addGroupInvalidName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2587,7 +3490,43 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("addUserEmail"),
+					connectorProperties.getProperty("addUserFullName"),
+					connectorProperties.getProperty("addUserUserName"), "",
+					connectorProperties.getProperty("addUserPassword"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2690,16 +3629,18 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
 					connectorProperties.getProperty("uri"),
 					modifiedAPISoapRequest);
-			
+
 			boolean hasGroupName = false;
-			Iterator<OMElement> iter = apiRespond.getFirstElement().getFirstElement().getFirstElement().getChildElements();
-			
-			while(iter.hasNext()){
+			Iterator<OMElement> iter = apiRespond.getFirstElement()
+					.getFirstElement().getFirstElement().getChildElements();
+
+			while (iter.hasNext()) {
 				OMElement o = iter.next();
-				if(o.getText().equals(connectorProperties.getProperty("addgroupGroupName")))
+				if (o.getText().equals(
+						connectorProperties.getProperty("addgroupGroupName")))
 					hasGroupName = true;
 			}
-			
+
 			Assert.assertTrue(hasGroupName);
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
@@ -2727,7 +3668,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"),
+					connectorProperties.getProperty("addgroupGroupName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2795,7 +3770,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidPassword"),
+					connectorProperties.getProperty("password"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2851,7 +3860,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"),
+					connectorProperties.getProperty("addUserPassword2"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -2927,7 +3970,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -3002,7 +4078,39 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,"invalidboolean");
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -3126,7 +4234,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -3203,7 +4344,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -3280,7 +4454,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -3354,7 +4561,40 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
@@ -3434,7 +4674,41 @@ public class ConfluenceConnectorIntegrationTest extends ESBIntegrationTest {
 			int statusCode = ConnectorIntegrationUtil
 					.sendRequestToRetriveHeaders(
 							getProxyServiceURL(methodName), modifiedJsonString);
+
+			OMElement omElement = ConnectorIntegrationUtil.sendXMLRequest(
+					getProxyServiceURL(methodName), modifiedJsonString);
+
+			String initFilePath = pathToAPIRequestDirectory + "init.xml";
+			final String initSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(initFilePath);
+			String modifiedSoapRequest = String.format(initSoapRequest,
+					connectorProperties.getProperty("username"),
+					connectorProperties.getProperty("password"));
+			OMElement resp = ConnectorIntegrationUtil
+					.sendXMLRequest(connectorProperties.getProperty("uri"),
+							modifiedSoapRequest);
+			String token = resp.getFirstElement().getFirstElement()
+					.getFirstElement().getText();
+
+			String apiSoapRequestFilePath = pathToAPIRequestDirectory
+					+ methodName + ".xml";
+			final String apiSoapRequest = ConnectorIntegrationUtil
+					.getFileContent(apiSoapRequestFilePath);
+			String modifiedAPISoapRequest = String.format(apiSoapRequest,
+					token,
+					connectorProperties.getProperty("invalidUserName"),
+					connectorProperties.getProperty("addgroupGroupName"));
+			OMElement apiRespond = ConnectorIntegrationUtil.sendXMLRequest(
+					connectorProperties.getProperty("uri"),
+					modifiedAPISoapRequest);
+
 			Assert.assertEquals(statusCode, 500);
+			Assert.assertEquals(
+					omElement.getText(),
+					((OMElement) (apiRespond.getFirstElement()
+							.getFirstElement()
+							.getChildrenWithLocalName("faultstring").next()))
+							.getText());
 		} finally {
 			proxyAdmin.deleteProxy(methodName);
 		}
